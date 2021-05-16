@@ -11,5 +11,5 @@ The Text Recognition Stage again contains Resnet-cifar version.The whole model i
 •Numpy <br />
 •sklearn <br />
 
-### Note-The wok is in progress and the repo will be updated frequently.
+***Note-The wok is in progress and the repo will be updated frequently.**
 
