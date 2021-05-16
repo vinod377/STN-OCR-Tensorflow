@@ -5,11 +5,11 @@ The Text Dection stage uses **Resnet-Cifar** version of Deep Residual Learning f
 The Text Recognition Stage again contains Resnet-cifar version.The whole model is trained together.
 
 ## Dependencies
-•Python-3.x
-•Tensorflow-2.3.1
-•Opencv-4.x
-•Numpy
-•sklearn
+•Python-3.x 
+•Tensorflow-2.3.1 
+•Opencv-4.x 
+•Numpy 
+•sklearn 
 
 ### Note-The wok is in progress and the repo will be updated frequently.
 
