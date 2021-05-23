@@ -1,16 +1,34 @@
-# This is a sample Python script.
+"""
+The script creates localisation network using resnet_stn.py by importing
+the class SpatialTransformerNetwork which contains the architecture of
+Resnet as proposed by the author, for Detection Network the filters [32,48,48]
+and for Recognition Network the filters are [32,64,128].The output of Localisation
+Network is n theta(6 num_hidden unit), which is fed to SpatialTransformer network
+along with initial input, It produces n sampled Image output which is fed to
+Recognition Network.
+"""
+import tensorflow as tf
+from model.stn_network import SpatialTransformerNetwork
+from model.resnet_stn import StnOcr
+from tensorflow.keras import layers
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+def stnOcrModel():
+    num_steps = 1
+    detection_filter = [32, 48, 48]
+    recognition_filter = [32,64,128]
+    stn_detection = StnOcr((128, 128,1), 10, detection_filter,recognition_filter)
+
+    flag = 'detection'
+    theta = stn_detection.resnetDetRec(flag)  # localisation Network
+    inp = stn_detection.input
+    stn_obj = SpatialTransformerNetwork(inp,theta,num_steps) # Grid genrator
+    sampled_image = stn_obj.image_sampling()  # sampled image from grid genrator
+
+    flag = 'Recognition'
+    out = stn_detection.resnetDetRec(flag)   # Recognition Model
+
+    print(out.shape)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    stnOcrModel()
