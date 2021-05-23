@@ -11,5 +11,10 @@ The Text Recognition Stage again contains Resnet-cifar version.The whole model i
 •Numpy <br />
 •sklearn <br />
 
+## Repository Structure
+• main.py script creates the whole model consiting of localisation network, Grid generator and sampler and Recognition network.<br />
+• stn_network.py script crates spatial transformer network, Grid genrator and bilinearsampler.<br />
+• resnet_stn.py script creates detection and recognition resnet network as proposed by the author.<br />
+
 ***Note-The wok is in progress and the repo will be updated frequently.**
 
