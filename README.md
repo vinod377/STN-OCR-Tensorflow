@@ -11,10 +11,13 @@ The Text Recognition Stage again contains Resnet-cifar version.The whole model i
 •Numpy <br />
 •sklearn <br />
 
-## Repository Structure
+## Repository Description
 • main.py script creates the whole model consiting of localisation network, Grid generator and sampler and Recognition network.<br />
 • stn_network.py script crates spatial transformer network, Grid genrator and bilinearsampler.<br />
 • resnet_stn.py script creates detection and recognition resnet network as proposed by the author.<br />
+
+## Dataset
+•The Street View House Numbers (SVHN) Dataset.[http://ufldl.stanford.edu/housenumbers/]
 
 ***Note-The wok is in progress and the repo will be updated frequently.**
 
