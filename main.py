@@ -8,8 +8,8 @@ along with initial input, It produces n sampled Image output which is fed to
 Recognition Network.
 """
 import tensorflow as tf
-from model.stn_network import SpatialTransformerNetwork
-from model.resnet_stn import StnOcr
+from src_code.models.stn_network import SpatialTransformerNetwork
+from src_code.models.resnet_stn import StnOcr
 from tensorflow.keras import layers
 
 def stnOcrModel():

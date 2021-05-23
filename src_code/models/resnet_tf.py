@@ -25,13 +25,16 @@ class ResnetModel_18_34:
             stride=2
         else:
             stride=1
-        inp = layers.Conv2D(filters=filter,kernel_size=size,padding = 'same',strides=stride,kernel_regularizer=regularizers.l1_l2(l1=1e-4, l2=1e-4),name=name+"conv")(input)
+        inp = layers.Conv2D(filters=filter,kernel_size=size,padding = 'same',
+                            strides=stride,kernel_regularizer=regularizers.l1_l2(l1=1e-4, l2=1e-4),
+                            name=name+"conv")(input)
         inp = layers.BatchNormalization(name=name+"Bn")(inp)
         inp = tf.nn.relu(inp,name=name+"relu")
         return inp
 
     def covnBn(self,input,filter,size,stride,name,padding='valid'):
-        inp = layers.Conv2D(filters=filter, kernel_size=size, strides=stride,padding=padding,kernel_regularizer=regularizers.l1_l2(l1=1e-4, l2=1e-4),name=name+"conv")(input)
+        inp = layers.Conv2D(filters=filter, kernel_size=size, strides=stride,padding=padding,
+                            kernel_regularizer=regularizers.l1_l2(l1=1e-4, l2=1e-4),name=name+"conv")(input)
         inp = layers.BatchNormalization(name=name+"Bn")(inp)
         return inp
 
@@ -59,7 +62,8 @@ def Residualnetwork(obj):
 
     input = obj.input
     inp = layers.Conv2D(filters=64,kernel_size=7,
-                        strides=2,padding='same',kernel_regularizer=regularizers.l1_l2(l1=1e-4, l2=1e-4),name = "Conv2_x0")(input)
+                        strides=2,padding='same',kernel_regularizer=regularizers.l1_l2(l1=1e-4, l2=1e-4),
+                        name = "Conv2_x0")(input)
 
     inp = layers.MaxPooling2D(pool_size=(3,3),strides=2,padding='same',name="maxpooling_x0")(inp)
     inp = layers.BatchNormalization(name="Bn0")(inp)

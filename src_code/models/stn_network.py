@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from src_code.models.bilinear_interpolation import bilinear_sampler
 
-
 class SpatialTransformerNetwork:
     def __init__(self, input, theta, num_steps, out=None):
         """
@@ -26,7 +25,6 @@ class SpatialTransformerNetwork:
         theta = layers.Reshape((self.num_steps, 2, 3))(self.theta)
 
         grid_num = theta.shape[1]
-        print("grid_num", grid_num)
         grid_h = H
         grid_w = W
         X = tf.linspace(1.0, -1.0, grid_w)
@@ -62,7 +60,6 @@ if __name__ == "__main__":
     input = layers.Input(shape=(128, 128, 1))
     num_steps = 1
     theta = tf.ones((1,num_steps, 6), dtype=tf.float32)
-
     stn_obj = SpatialTransformerNetwork(input,theta,num_steps)
     stn_obj.image_sampling()
 
