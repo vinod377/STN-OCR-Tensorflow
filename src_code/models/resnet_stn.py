@@ -1,5 +1,5 @@
 """
-the script is the implementation of Resnet detection(Localisation network) and Recognition Network
+The script is the implementation of Resnet detection(Localisation network) and Recognition Network
 """
 import tensorflow as tf
 from tensorflow.keras import layers
