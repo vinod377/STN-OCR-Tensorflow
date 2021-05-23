@@ -1,9 +1,13 @@
+"""
+the script is the implementation of Resnet detection(Localisation network) and Recognition Network
+"""
 import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras import regularizers
 from src_code.models.resnet_tf import ResnetModel_18_34
 
 kernel_regularizer = regularizers.l1_l2(l1=1e-4, l2=1e-4)
+
 class StnOcr(ResnetModel_18_34):
     def __init__(self, input, nb_classes, detection_filter, recognition_filter):
         """

@@ -1,3 +1,6 @@
+"""
+Implementation of spatial Transformer Network with Bilinear Interpolation
+"""
 import tensorflow as tf
 from tensorflow.keras import layers
 from src_code.models.bilinear_interpolation import bilinear_sampler
