@@ -5,11 +5,11 @@ The Text Dection stage uses **Resnet-Cifar** version of Deep Residual Learning f
 The Text Recognition Stage again contains Resnet-cifar version.The whole model is trained together.
 
 ## Dependencies
-•Python-3.x <br />
-•Tensorflow-2.3.1 <br />
-•Opencv-4.x <br />
-•Numpy <br />
-•sklearn <br />
+• Python-3.x <br />
+• Tensorflow-2.3.1 <br />
+• Opencv-4.x <br />
+• Numpy <br />
+• sklearn <br />
 
 ## Repository Description
 • main.py script creates the whole model consiting of localisation network, Grid generator and sampler and Recognition network.<br />
@@ -17,7 +17,8 @@ The Text Recognition Stage again contains Resnet-cifar version.The whole model i
 • resnet_stn.py script creates detection and recognition resnet network as proposed by the author.<br />
 
 ## Dataset
-•The Street View House Numbers (SVHN) Dataset.[http://ufldl.stanford.edu/housenumbers/]
+• The Street View House Numbers (SVHN) Dataset.[http://ufldl.stanford.edu/housenumbers/]
+• Google FSNS dataset.[https://rrc.cvc.uab.es/?ch=6]
 
 ***Note-The wok is in progress and the repo will be updated frequently.**
 
