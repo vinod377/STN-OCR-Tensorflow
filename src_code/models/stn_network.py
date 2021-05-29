@@ -41,7 +41,7 @@ class SpatialTransformerNetwork:
         samplig_grid = tf.tile(samplig_grid, tf.stack([grid_num, 1, 1]))
         samplig_grid = tf.expand_dims(samplig_grid, axis=0)
         gen_grid = tf.matmul(theta, samplig_grid)
-        gen_grid = layers.Reshape([self.num_steps, 2, 128, 128])(gen_grid)
+        gen_grid = layers.Reshape([self.num_steps, 2, 600, 150])(gen_grid)
         gen_grid_x = gen_grid[:, :, 0, :, :]
         gen_grid_y = gen_grid[:, :, 1, :, :]
 
@@ -50,7 +50,7 @@ class SpatialTransformerNetwork:
     def image_sampling(self):
         gen_grid_x, gen_grid_y = self.grid_genrator()
         stacked_image = tf.expand_dims(self.input, axis=1)
-        stacked_image = tf.tile(stacked_image, tf.constant([num_steps, 2, 1, 1, 1], tf.int32))
+        stacked_image = tf.tile(stacked_image, tf.constant([self.num_steps, 2, 1, 1, 1], tf.int32))
         output_feature_list = []
         for i in range(self.num_steps):
             output_feature_list.append(
@@ -60,7 +60,7 @@ class SpatialTransformerNetwork:
 
 
 if __name__ == "__main__":
-    input = layers.Input(shape=(128, 128, 1))
+    input = layers.Input(shape=(600, 150, 1))
     num_steps = 1
     theta = tf.ones((1,num_steps, 6), dtype=tf.float32)
     stn_obj = SpatialTransformerNetwork(input,theta,num_steps)

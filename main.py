@@ -16,7 +16,7 @@ def stnOcrModel():
     num_steps = 1
     detection_filter = [32, 48, 48]
     recognition_filter = [32,64,128]
-    stn_detection = StnOcr((128, 128,1), 10, detection_filter,recognition_filter)
+    stn_detection = StnOcr((600,150,1), 10, detection_filter,recognition_filter)
 
     flag = 'detection'
     theta = stn_detection.resnetDetRec(flag)  # localisation Network
@@ -25,9 +25,9 @@ def stnOcrModel():
     sampled_image = stn_obj.image_sampling()  # sampled image from grid genrator
 
     flag = 'Recognition'
-    out = stn_detection.resnetDetRec(flag)   # Recognition Model
-
-    print(out.shape)
+    out = stn_detection.resnetDetRec(sampled_image,flag)   # Recognition Model
+    stn_model = tf.keras.Model(inp,out)
+    stn_model.summary()
 
 
 if __name__ == '__main__':

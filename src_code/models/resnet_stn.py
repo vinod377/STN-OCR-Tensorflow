@@ -23,45 +23,50 @@ class StnOcr(ResnetModel_18_34):
         self.detection_filter = detection_filter
         self.recognition_filter = recognition_filter
 
-    def resnetDetRec(self, flag='detection'):
+    def resnetDetRec(self,sampled_image=None,flag='detection'):
         if flag == 'detection':
             filter = self.detection_filter
+            inp = self.input
+            name='det'
         else:
             filter = self.recognition_filter
+            inp = sampled_image
+            name='rec'
+
         print(filter[0], filter[1], filter[2])
-        inp = self.input
-        inp = layers.Conv2D(filters=32, kernel_size=(3, 3), padding='same', kernel_regularizer=kernel_regularizer)(inp)
-        inp = layers.BatchNormalization()(inp)
-        inp = layers.AvgPool2D(strides=2)(inp)
+        with tf.name_scope(name) as scope:
+            inp = layers.Conv2D(filters=32, kernel_size=(3, 3), padding='same', kernel_regularizer=kernel_regularizer,name=scope+'/conv2d0/')(inp)
+            inp = layers.BatchNormalization(name=scope+'/conv2d0_bn/')(inp)
+            inp = layers.AvgPool2D(strides=2,name=scope+'/conv2d0_avgPooling/')(inp)
 
-        inp = self.residualNet(inp=inp, filter=filter[0], size=3, stride=1, projection=False, name=f'Conv2d_block1/')
+            inp = self.residualNet(inp=inp, filter=filter[0], size=3, stride=1, projection=False, name=scope+f'Conv2d_block1/')
 
-        inp = self.residualNet(inp=inp, filter=filter[1], size=3, stride=1, projection=True, name=f'Conv2d_block2/')
-        inp = layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(inp)
+            inp = self.residualNet(inp=inp, filter=filter[1], size=3, stride=1, projection=True, name=scope+f'Conv2d_block2/')
+            inp = layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(inp)
 
-        inp = self.residualNet(inp=inp, filter=filter[2], size=3, stride=1, projection=True, name=f'Conv2d_block3/')
-        inp = layers.AvgPool2D(pool_size=5)(inp)
-        inp = layers.Flatten()(inp)
+            inp = self.residualNet(inp=inp, filter=filter[2], size=3, stride=1, projection=True, name=scope+f'Conv2d_block3/')
+            inp = layers.AvgPool2D(pool_size=5)(inp)
+            inp = layers.Flatten()(inp)
 
-        if flag == 'detection':
-            inp = layers.Reshape((self.num_steps, -1))(inp)
-            inp = layers.Bidirectional(layers.LSTM(256, return_sequences=True))(inp)
-            theta = layers.TimeDistributed(layers.Dense(6, activation='sigmoid'))(inp)
-            return theta
-        else:
-            inp = layers.Dense(256, activation='relu')(inp)
-            classifiers = []
-            for i in range(self.num_labels):
-                inp = layers.Dense(11)(inp)
-                inp = layers.Reshape((self.num_steps, -1, 11))(inp)
-                inp = tf.expand_dims(inp, axis=1)
-                classifiers.append(inp)
+            if flag == 'detection':
+                inp = layers.Reshape((self.num_steps, -1))(inp)
+                inp = layers.Bidirectional(layers.LSTM(256, return_sequences=True))(inp)
+                theta = layers.TimeDistributed(layers.Dense(6, activation='sigmoid'))(inp)
+                return theta
+            else:
+                inp = layers.Dense(256, activation='relu')(inp)
+                classifiers = []
+                for i in range(self.num_labels):
+                    inp = layers.Dense(11)(inp)
+                    inp = layers.Reshape((self.num_steps, -1, 11))(inp)
+                    inp = tf.expand_dims(inp, axis=1)
+                    classifiers.append(inp)
 
-            inp = layers.concatenate(classifiers, axis=1)
-            inp = layers.Reshape((-1, 11))(inp)
-            inp = tf.keras.activations.softmax(inp)
-            print(inp.shape)
-            return inp
+                inp = layers.concatenate(classifiers, axis=1)
+                inp = layers.Reshape((-1, 11))(inp)
+                inp = tf.keras.activations.softmax(inp)
+                print(inp.shape)
+                return inp
 
 
 if __name__ == "__main__":
