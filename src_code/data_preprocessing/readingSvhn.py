@@ -8,8 +8,8 @@ import os
 import h5py
 import pickle
 
-folder_path = "/Users/tangerine/PycharmProjects/dataset/svhn/train/"
-write_folder = "/Users/tangerine/PycharmProjects/dataset/svhn/train_cropped/"
+folder_path = "/dataset/svhn/train/"
+write_folder = "/dataset/svhn/train_cropped/"
 
 class Svhn:
     def __init__(self):
@@ -91,7 +91,7 @@ class Svhn:
 
 if __name__=="__main__":
     obj = Svhn()
-    file_path = '/Users/tangerine/PycharmProjects/dataset/svhn/train/digitStruct.mat'
+    file_path = '/dataset/svhn/train/digitStruct.mat'
     # obj.readingMatFile(file_path)
     obj.displayAndWrite()
 
