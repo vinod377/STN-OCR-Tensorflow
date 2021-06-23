@@ -1,5 +1,5 @@
 """
-The script takes digitStruct.mat file of SVHN, Reads it and save the labels and bbox
+The script takes digitStruct.mat file of SVHN, Read it and save the labels and bbox
 information python pickle file.The image is re-wriiten after cropping the image region
 from full image and appending the label in the original image of the file.
 """
@@ -94,5 +94,6 @@ if __name__=="__main__":
     file_path = '/dataset/svhn/train/digitStruct.mat'
     # obj.readingMatFile(file_path)
     obj.displayAndWrite()
+    print("hello")
 
 
