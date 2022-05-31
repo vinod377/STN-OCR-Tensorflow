@@ -2,7 +2,7 @@
 The script creates localisation network using resnet_stn.py by importing
 the class SpatialTransformerNetwork which contains the architecture of
 Resnet as proposed by the author, for Detection Network the filters [32,48,48]
-and for Recognition Network the filters are [32,64,128].The output of Localisation
+and for Recognition Network the filters are [32,64,128]. The output of Localisation
 Network is n theta(6 num_hidden unit), which is fed to SpatialTransformer network
 along with initial input, It produces n sampled Image output which is fed to
 Recognition Network.
