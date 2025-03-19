@@ -19,3 +19,28 @@ Detecting and recognizing text in natural scene images. This is still an open pr
 
 ***Note-The wok is in progress and the repo will be updated frequently.**
 
+
+### Description
+- Update the runner code to take command line arguments instead of reading it from Json
+- Replaced Segmentation model from 79 to 47. 
+
+### Changes Made
+- Updated the code to take CLI arguments.
+- Removed dependency from Json file.
+- Removed ankle and hip related code.
+- Changed Segmentation model to 47.
+- Updated Dockerfile.
+
+
+### Related Issues
+<Provide links to the related issues or feature requests.>
+
+### Additional Notes
+- The code output has dependency on mymako_osteophytes and mymako_bmd.
+
+### Merge Request Checklists
+- [ ] Code follows project coding guidelines.
+- [ ] Documentation reflects the changes made.
+- [x] I have already covered the unit testing.
+
+
